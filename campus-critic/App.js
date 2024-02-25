@@ -1,0 +1,25 @@
+import { StatusBar } from 'expo-status-bar';
+import { FlatList, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import SplashScreen from './SplashScreen';
+
+export default function App() {
+  return SplashScreen();
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    flex: 1,
+    backgroundColor: 'lightblue',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    width: 200,
+  },
+});
