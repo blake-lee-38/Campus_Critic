@@ -8,8 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../config/firebaseConfig";
+import { signUp } from "../methods/signIn";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -17,16 +16,11 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
 
   const onHandleSignUp = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      console.log("User created!", user);
-    } catch (error) {
-      Alert.alert(error.message);
+    const signUpInfo = await signUp(email, password);
+    if (signUpInfo.message === "Success") {
+      console.log("User created!", signUpInfo.user);
+    } else {
+      console.log(signUpInfo.message);
     }
   };
 
