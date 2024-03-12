@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "642430350313",
+    "project_id": "campus-critic",
+    "storage_bucket": "campus-critic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642430350313:android:eff8f310e87cf43d38d178",
+        "android_client_info": {
+          "package_name": "com.campus.critic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCkb2Vb5C-lgm2TOJuNfIqzE55RcZGWkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
