@@ -1,3 +1,9 @@
 # Campus Critic
 
-App designed to help college students get to know their local town and find essential recommendations for places like restuarants, mechanics, and whatever else they made need. Built using React Native with Expo, Flask, Firebase \[Auth and Firestore\], and Google Gemini
+>
+>Mobile app designed to help college students get to know their college town
+>
+
+# Built Using
+
+[![My Skills](https://skillicons.dev/icons?i=gcp,react,firebase,flask,git,js,py&perline=8)](https://skillicons.dev)
