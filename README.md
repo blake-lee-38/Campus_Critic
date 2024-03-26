@@ -6,19 +6,20 @@
 
 # Built Using
 
-[![My Skills](https://skillicons.dev/icons?i=gcp,react,firebase,flask,git,js,py&perline=8)](https://skillicons.dev)
-**Operating Systems**
-Windows 11
-macOS 14 \[Sonoma\]
+[![My Skills](https://skillicons.dev/icons?i=gcp,react,firebase,flask,git,js,py&perline=8)](https://skillicons.dev) 
+
+**Operating Systems:**
+Windows 11, 
+macOS 14 \[Sonoma\], 
 Linux 21.3
 
-**Versions**
-GCP: Go 1.22
-React Native: 0.73
-Firebase Auth: 22.3.1
-Firebase Firestore: 24.11.0
-Flask: 3.0.2
-JavaScript: ES6
+**Versions:**
+GCP: Go 1.22, 
+React Native: 0.73, 
+Firebase Auth: 22.3.1, 
+Firebase Firestore: 24.11.0, 
+Flask: 3.0.2, 
+JavaScript: ES6, 
 Python: 3.10.14
 
 # Developer Notes
