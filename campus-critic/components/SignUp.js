@@ -8,19 +8,32 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { signUp } from "../methods/signIn";
+import { signUp, signUpGoogle } from "../methods/auth";
 
-export default function SignUp() {
+export default function SignUp({ promptAsync }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onHandleSignUp = async () => {
-    const signUpInfo = await signUp(email, password);
-    if (signUpInfo.message === "Success") {
-      console.log("User created!", signUpInfo.user);
+    const signUpResult = await signUp(email, password);
+    if (signUpResult.message === "Success") {
+      console.log("User created!", signUpResult.user);
     } else {
-      console.log(signUpInfo.message);
+      setErrorMessage(signUpResult.message);
+      console.log(signUpResult.message);
+    }
+  };
+
+  const onGoogleButtonPress = async () => {
+    const googleSignUpResult = await signUpGoogle();
+    if (googleSignUpResult.message === "Success") {
+      console.log("User created!", googleSignUpResult.user);
+    } else {
+      setErrorMessage(googleSignUpResult.message);
+      console.log(googleSignUpResult.message);
     }
   };
 
@@ -63,9 +76,27 @@ export default function SignUp() {
             onChangeText={(text) => setPassword(text)}
           />
 
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            autoCapitalize="none"
+            autoCorrect={false}
+            showSoftInputOnFocus={false}
+            secureTextEntry={true}
+            textContentType="password"
+            value={confirmPassword}
+            onChangeText={(text) => setConfirmPassword(text)}
+          />
+
           <TouchableOpacity style={styles.button} onPress={onHandleSignUp}>
             <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
               Sign Up
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button} onPress={onGoogleButtonPress}>
+            <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
+              Sign Up WITH GOOGLE
             </Text>
           </TouchableOpacity>
 

@@ -9,9 +9,20 @@ import {
 import React, { useState, useEffect } from "react";
 import SplashScreen from "./SplashScreen";
 import SignUp from "./SignUp";
+import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithCredential,
+} from "firebase/auth";
+import { auth } from "../config/firebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
-  return SignUp();
+  return <SignUp />;
 
   //return SplashScreen();
 }
