@@ -10,7 +10,7 @@ export default function SplashScreen() {
                     require('./assets/critic-logo.png')
                 }
             />
-            <Text>See Restaurants in Your Area!</Text>
+            <Text>Rachel and Raiah are fighting.</Text>
 
         </SafeAreaView>
     )
