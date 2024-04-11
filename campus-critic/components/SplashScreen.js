@@ -26,7 +26,7 @@ export default function SplashScreen({navigation}) {
                         </View>
                     </TouchableOpacity>
                     {/* Register Button */}
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register Screen')}>
                         <View style={styles.registerButtonBack}>
                             <Text style={styles.register}>Register</Text>
                         </View>

@@ -4,20 +4,15 @@ import colors from '../assets/colors/colors'; // Assuming you have color definit
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 export default function LoginScreen() {
+    const navigation = useNavigation();
+    const [username, setUsername] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const navigation = useNavigation(); // Get the navigation object
-
-    const handleLogin = () => {
-        console.log(`Email: ${email}, Password: ${password}`);
-    };
+    const [confirmPassword, setConfirmPassword] = React.useState('');
 
     const handleRegister = () => {
-        console.log('Navigate to Register screen');
-    };
-
-    const handleForgotPassword = () => {
-        console.log('Navigate to Forgot Password screen');
+        // Implement your register functionality here
+        console.log('Register button pressed');
     };
 
     return (
@@ -28,36 +23,56 @@ export default function LoginScreen() {
             >
                 <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
-            <Text style={styles.welcomeBack}>Welcome Back!</Text>
-            <View style={styles.inputContainer}>
-                <TextInput 
-                    style={styles.input}
+            <Text style={styles.welcomeBack}>Hello! Register to get started.</Text>
+            <View style={styles.inputField}>
+                <TextInput
+                    style={styles.inputText}
+                    placeholder="Enter your username"
+                    placeholderTextColor={colors.gray}
+                    value={username}
+                    onChangeText={setUsername}
+                />
+            </View>
+            <View style={styles.inputField}>
+                <TextInput
+                    style={styles.inputText}
                     placeholder="Enter your email"
                     placeholderTextColor={colors.gray}
                     keyboardType="email-address"
                     value={email}
                     onChangeText={setEmail}
-                    textAlignVertical="center"
                 />
             </View>
-            <View style={styles.inputContainer}>
-                <TextInput 
-                    style={styles.input}
+            <View style={styles.inputField}>
+                <TextInput
+                    style={styles.inputText}
                     placeholder="Enter your password"
                     placeholderTextColor={colors.gray}
                     secureTextEntry={true}
                     value={password}
                     onChangeText={setPassword}
-                    textAlignVertical="center"
                 />
             </View>
-            <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
+            <View style={styles.inputField}>
+                <TextInput
+                    style={styles.inputText}
+                    placeholder="Confirm your password"
+                    placeholderTextColor={colors.gray}
+                    secureTextEntry={true}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                />
+            </View>
+            <TouchableOpacity
+                style={styles.rectangle173}
+                onPress={handleRegister}
+            >
+                <Text style={styles.register}>Register</Text>
             </TouchableOpacity>
             <View style={styles.root}>
-                <Text style={styles.dontHaveAnAccount}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Register Screen')}>
-                    <Text style={[styles.registerNow, styles.underline]}>Register now!</Text>
+                <Text style={styles.alreadyHaveAnAccount}>Already have an account? </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Login Screen')}>
+                    <Text style={[styles.loginNow, styles.underline]}>Login now!</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         marginLeft: 35,
     },
-    inputContainer: {
+    inputField: {
         width: 331,
         height: 56,
         borderRadius: 8,
@@ -96,27 +111,27 @@ const styles = StyleSheet.create({
         borderColor: colors.border,
         backgroundColor: 'rgba(247, 248, 249, 1)',
         marginBottom: 10,
+        justifyContent: 'center',
     },
-    input: {
-        width: '100%',
+    inputText: {
+        color: colors.gray,
         fontSize: 15,
         paddingHorizontal: 10,
-        paddingTop: 18,
-        paddingBottom: 0,
-        color: colors.gray,
-        textAlignVertical: 'center',
     },
-    button: {
+    rectangle173: {
         width: 331,
         height: 56,
         borderRadius: 8,
+        borderWidth: 1,
+        borderColor: colors.primary,
         backgroundColor: colors.primary,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20, // Add margin top to separate from the forgot password button
+        marginTop: 20,
     },
-    buttonText: {
+    register: {
         color: colors.white,
+        textAlign: 'center',
         fontSize: 15,
         fontWeight: '600',
     },
@@ -124,33 +139,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 50,
     },
-    dontHaveAnAccount: {
+    alreadyHaveAnAccount: {
         color: colors.primary,
         fontSize: 15,
         fontWeight: '700',
-        marginTop: 50,
     },
-    registerNow: {
+    loginNow: {
         color: colors.secondary,
         fontSize: 15,
         fontWeight: '600',
-        marginTop: 50,
     },
     underline: {
         textDecorationLine: 'underline',
-    },
-    forgotPasswordButton: {
-        width: '100%',
-        alignItems: 'flex-end',
-        marginTop: 10,
-        marginBottom: 20, // Add spacing between this button and the login button
-    },
-    forgotPassword: {
-        color: colors.darkGray,
-        fontSize: 14,
-        fontWeight: '600',
-        marginRight: 35,
     },
 });
