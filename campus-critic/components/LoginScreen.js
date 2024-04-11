@@ -16,6 +16,10 @@ export default function LoginScreen() {
         console.log('Navigate to Register screen');
     };
 
+    const handleForgotPassword = () => {
+        console.log('Navigate to Forgot Password screen');
+    };
+
     return (
         <View style={styles.container}>
             <TouchableOpacity
@@ -47,6 +51,12 @@ export default function LoginScreen() {
                     textAlignVertical="center"
                 />
             </View>
+            <TouchableOpacity 
+                style={styles.forgotPasswordButton} 
+                onPress={handleForgotPassword}
+            >
+                <Text style={[styles.forgotPassword, styles.underline]}>Forgot Password?</Text>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
@@ -77,64 +87,68 @@ const styles = StyleSheet.create({
         color: colors.primary,
     },
     welcomeBack: {
-        color: colors.primary,  // Assuming colors.primary is defined
+        color: colors.primary,
         fontSize: 30,
-        fontStyle: 'normal',
         fontWeight: '700',
-        letterSpacing: -0.3,
+        marginBottom: 20,
         alignSelf: 'flex-start',
-        marginLeft: 35,  // Adjust this value to match the input boxes' alignment
+        marginLeft: 35,
     },
     inputContainer: {
         width: 331,
         height: 56,
         borderRadius: 8,
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: colors.border,  // Assuming colors.border is defined
+        borderColor: colors.border,
         backgroundColor: 'rgba(247, 248, 249, 1)',
-        marginBottom: 20,  // Add spacing between inputs
+        marginBottom: 10,
     },
     input: {
         width: '100%',
         fontSize: 15,
-        paddingHorizontal: 10,  // maintain horizontal padding
-        paddingTop: 18,  // adjust top padding if necessary
-        paddingBottom: 0,  // adjust bottom padding if necessary
+        paddingHorizontal: 10,
+        paddingTop: 18,
+        paddingBottom: 0,
         color: colors.gray,
         textAlignVertical: 'center',
     },
     button: {
         width: 331,
         height: 56,
-        flexShrink: 0,
         borderRadius: 8,
         backgroundColor: colors.primary,
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 20, // Add margin top to separate from the forgot password button
     },
     buttonText: {
         color: colors.white,
-        textAlign: 'center',
         fontSize: 15,
-        fontStyle: 'normal',
         fontWeight: '600',
     },
     root: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10, // Add margin top to separate from the button
+        marginTop: 10,
     },
     registerNow: {
-        color: colors.secondary,  // Assuming colors.secondary is defined
-        textAlign: 'center',
+        color: colors.secondary,
         fontSize: 15,
-        fontStyle: 'normal',
         fontWeight: '700',
-        letterSpacing: 0.15,
     },
     underline: {
         textDecorationLine: 'underline',
+    },
+    forgotPasswordButton: {
+        width: '100%',
+        alignItems: 'flex-end',
+        marginTop: 10,
+        marginBottom: 20, // Add spacing between this button and the login button
+    },
+    forgotPassword: {
+        color: colors.darkGray,
+        fontSize: 14,
+        fontWeight: '600',
     },
 });
