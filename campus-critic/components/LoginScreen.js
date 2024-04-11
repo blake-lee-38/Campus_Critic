@@ -11,9 +11,14 @@ export default function LoginScreen() {
         console.log(`Email: ${email}, Password: ${password}`);
     };
 
+    const handleRegister = () => {
+        // Handle navigation to the register screen or any other action
+        console.log('Navigate to Register screen');
+    };
+
     return (
         <View style={styles.container}>
-            <Text style={styles.welcomeBackGladToSeeYouAgain}>Welcome Back!</Text>
+            <Text style={styles.welcomeBack}>Welcome Back!</Text>
             <View style={styles.inputContainer}>
                 <TextInput 
                     style={styles.input} 
@@ -39,6 +44,12 @@ export default function LoginScreen() {
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
+            <View style={styles.root}>
+                <Text style={styles.registerNow}>Don't have an account? </Text>
+                <TouchableOpacity onPress={handleRegister}>
+                    <Text style={[styles.registerNow, styles.underline]}>Register now!</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -50,12 +61,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.background,  // Assuming colors.background is defined
     },
-    welcomeBackGladToSeeYouAgain: {
+    welcomeBack: {
         color: colors.primary,  // Assuming colors.primary is defined
         fontSize: 30,
         fontStyle: 'normal',
         fontWeight: '700',
         letterSpacing: -0.3,
+        alignSelf: 'flex-start',
+        marginLeft: 35,  // Adjust this value to match the input boxes' alignment
     },
     inputContainer: {
         width: 331,
@@ -69,23 +82,44 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        fontFamily: 'Urbanist',
         fontSize: 15,
-        padding: 10,
-        color: colors.gray,  // Assuming colors.gray is defined
-        textAlignVertical: 'center',  // Vertically center the text
+        paddingHorizontal: 10,  // maintain horizontal padding
+        paddingTop: 18,  // adjust top padding if necessary
+        paddingBottom: 0,  // adjust bottom padding if necessary
+        color: colors.gray,
+        textAlignVertical: 'center',
     },
     button: {
         width: 331,
         height: 56,
+        flexShrink: 0,
         borderRadius: 8,
-        backgroundColor: colors.primary,  // Assuming colors.primary is defined
+        backgroundColor: colors.primary,
         justifyContent: 'center',
         alignItems: 'center',
     },
     buttonText: {
-        color: 'white',
-        fontSize: 18,
-        fontWeight: 'bold',
+        color: colors.white,
+        textAlign: 'center',
+        fontSize: 15,
+        fontStyle: 'normal',
+        fontWeight: '600',
+    },
+    root: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10, // Add margin top to separate from the button
+    },
+    registerNow: {
+        color: colors.secondary,  // Assuming colors.secondary is defined
+        textAlign: 'center',
+        fontSize: 15,
+        fontStyle: 'normal',
+        fontWeight: '700',
+        letterSpacing: 0.15,
+    },
+    underline: {
+        textDecorationLine: 'underline',
     },
 });
