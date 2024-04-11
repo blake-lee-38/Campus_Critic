@@ -1,44 +1,50 @@
 import * as React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import colors from '../assets/colors/colors';  // Assuming you have color definitions here
+import colors from '../assets/colors/colors'; // Assuming you have color definitions here
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
 export default function LoginScreen() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    
+    const navigation = useNavigation(); // Get the navigation object
+
     const handleLogin = () => {
-        // Handle login logic here using the email and password state variables
         console.log(`Email: ${email}, Password: ${password}`);
     };
 
     const handleRegister = () => {
-        // Handle navigation to the register screen or any other action
         console.log('Navigate to Register screen');
     };
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.navigate('Splash Screen')}
+            >
+                <Text style={styles.backButtonText}>Back</Text>
+            </TouchableOpacity>
             <Text style={styles.welcomeBack}>Welcome Back!</Text>
             <View style={styles.inputContainer}>
                 <TextInput 
-                    style={styles.input} 
+                    style={styles.input}
                     placeholder="Enter your email"
-                    placeholderTextColor={colors.gray}  // Assuming colors.gray is defined
+                    placeholderTextColor={colors.gray}
                     keyboardType="email-address"
                     value={email}
                     onChangeText={setEmail}
-                    textAlignVertical="center"  // Vertically center the text
+                    textAlignVertical="center"
                 />
             </View>
             <View style={styles.inputContainer}>
                 <TextInput 
-                    style={styles.input} 
+                    style={styles.input}
                     placeholder="Enter your password"
-                    placeholderTextColor={colors.gray}  // Assuming colors.gray is defined
-                    secureTextEntry={true}  // Obscure the password
+                    placeholderTextColor={colors.gray}
+                    secureTextEntry={true}
                     value={password}
                     onChangeText={setPassword}
-                    textAlignVertical="center"  // Vertically center the text
+                    textAlignVertical="center"
                 />
             </View>
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
@@ -59,7 +65,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.background,  // Assuming colors.background is defined
+        backgroundColor: colors.background,
+    },
+    backButton: {
+        position: 'absolute',
+        top: 50,
+        left: 15,
+        padding: 10,
+    },
+    backButtonText: {
+        color: colors.primary,
     },
     welcomeBack: {
         color: colors.primary,  // Assuming colors.primary is defined
