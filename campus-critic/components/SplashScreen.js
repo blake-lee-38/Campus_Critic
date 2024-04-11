@@ -2,8 +2,9 @@ import * as React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../assets/colors/colors';
+import LoginScreen from './LoginScreen';
 
-export default function SplashScreen() {
+export default function SplashScreen({navigation}) {
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
@@ -18,23 +19,19 @@ export default function SplashScreen() {
                 
                 {/* Buttons Group */}
                 <View style={styles.buttonsGroup}>
-                    <TouchableOpacity style={styles.button}>
+                    {/* Login Button */}
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login Screen')}>
                         <View style={styles.loginButtonBack}>
                             <Text style={styles.login}>Login</Text>
                         </View>
                     </TouchableOpacity>
-
+                    {/* Register Button */}
                     <TouchableOpacity style={styles.button}>
                         <View style={styles.registerButtonBack}>
                             <Text style={styles.register}>Register</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-
-                {/* Continue as Guest */}
-                <TouchableOpacity style={styles.guestButton}>
-                    <Text style={styles.continueAsAGuest}>Continue as a Guest</Text>
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -54,12 +51,11 @@ const styles = StyleSheet.create({
     },
     logoTitleGroup: {
         alignItems: 'center',
-        marginBottom: 80, // Space between logo/title and buttons
+        marginBottom: 100, // Space between logo/title and buttons
     },
     buttonsGroup: {
         width: '100%',
         alignItems: 'center',
-        marginBottom: 60, // Space between buttons and continue as guest
     },
     logo: {
         width: 200,
@@ -109,18 +105,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         fontWeight: '600',
-    },
-    guestButton: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexShrink: 0,
-    },
-    continueAsAGuest: {
-        color: colors.primary,
-        textAlign: 'center',
-        fontSize: 15,
-        fontWeight: '700',
-        textDecorationLine: 'underline',
     },
 });
