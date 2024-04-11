@@ -29,6 +29,7 @@ export default function SignUp({ promptAsync }) {
 
   const onGoogleButtonPress = async () => {
     const googleSignUpResult = await signUpGoogle();
+    console.log(googleSignUpResult);
     if (googleSignUpResult.message === "Success") {
       console.log("User created!", googleSignUpResult.user);
     } else {
@@ -99,6 +100,8 @@ export default function SignUp({ promptAsync }) {
               Sign Up WITH GOOGLE
             </Text>
           </TouchableOpacity>
+
+          <Text>{errorMessage}</Text>
 
           {/* Navigation to Login Screen */}
           <View
