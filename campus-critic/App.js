@@ -1,25 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import SplashScreen from './SplashScreen';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
-  return SplashScreen();
+import SplashScreen from './components/SplashScreen';
+import LoginScreen from './components/LoginScreen';
+import RegisterScreen from './components/RegisterScreen';
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Splash Screen" component={SplashScreen} 
+          options= {{headerShown: false,}}
+          />
+          <Stack.Screen name="Login Screen" component={LoginScreen} 
+          options= {{headerShown: false,}}
+          />
+          <Stack.Screen name="Register Screen" component={RegisterScreen} 
+          options= {{headerShown: false,}}
+          />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-    backgroundColor: 'lightblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    width: 200,
-  },
-});
+export default App;
