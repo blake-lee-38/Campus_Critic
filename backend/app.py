@@ -74,6 +74,16 @@ def get_restaurant_reviews(request, postID, pageNum):
         reviewRangeStart += 1
 
     return reviewsPayload
+
+def callAPI():
+    import google.generativeai as genai
+
+    genai.configure(api_key='AIzaSyDb9jb3yDjICQLaKLVxjZEIzl1YrPmt7Tw')
+    model = genai.GenerativeModel('gemini-pro')
+    response = model.generate_content("Someone likes panda express. Make a suggestion on one other restaurant they should "
+                                  "try. You dont need to give me the why.")
+
+    print(response.text)
     
 
 if __name__ == "__main__":
