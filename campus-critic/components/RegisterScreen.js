@@ -34,6 +34,17 @@ export default function LoginScreen() {
     }
   };
 
+  const onGoogleButtonPressed = async () => {
+    const googleSignUpResult = await signUpGoogle();
+    console.log(googleSignUpResult);
+    if (googleSignUpResult.message === "Success") {
+      console.log("User created!", googleSignUpResult.user);
+    } else {
+      setErrorMessage(googleSignUpResult.message);
+      console.log(googleSignUpResult.message);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -85,6 +96,12 @@ export default function LoginScreen() {
       <Text style={styles.underline}>{errorMessage}</Text>
       <TouchableOpacity style={styles.rectangle173} onPress={handleRegister}>
         <Text style={styles.register}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.rectangle173}
+        onPress={onGoogleButtonPressed}
+      >
+        <Text style={styles.register}>Register With Google</Text>
       </TouchableOpacity>
       <View style={styles.root}>
         <Text style={styles.alreadyHaveAnAccount}>

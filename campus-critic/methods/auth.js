@@ -1,12 +1,10 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
-import auth from "@react-native-firebase/auth";
-import { auth as Fauth } from "../config/firebaseConfig";
-
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { auth } from "../config/firebaseConfig";
 
 export const signUp = async (email, pass) => {
   // RE ensures password has 1 special character, 1 uppercase/lowercase letter, 1 num, and is at least 8 characters long
@@ -19,7 +17,7 @@ export const signUp = async (email, pass) => {
   if (email.match(emailRegex) && pass.match(passRegex)) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
-        Fauth,
+        auth,
         email,
         pass
       );
@@ -40,7 +38,7 @@ export const signUp = async (email, pass) => {
 
 export const signIn = async (email, pass) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(Fauth, email, pass);
+    const userCredential = await signInWithEmailAndPassword(auth, email, pass);
     const user = userCredential.user;
     console.log("User signed In!", user);
     return { message: "Success", user: "user" };
@@ -50,22 +48,31 @@ export const signIn = async (email, pass) => {
 };
 
 export const signUpGoogle = async () => {
-  GoogleSignin.configure({
-    webClientId:
-      "642430350313-fbd6la090g01hl0jc8ri0jbjh8ab0d3l.apps.googleusercontent.com",
-  });
-  try {
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-
-    const idToken = await GoogleSignin.signIn();
-    console.log(idToken.idToken);
-    const googleCredential = auth.GoogleAuthProvider.credential(
-      idToken.idToken
-    );
-
-    const user = await auth().signInWithCredential(googleCredential);
-    return { message: "Success", user: user };
-  } catch (error) {
-    return { message: error.message };
-  }
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      console.log("User signed in with Google!", user);
+      return { message: "Success", user: user };
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log(
+        "Error signing in with Google",
+        errorCode,
+        errorMessage,
+        email
+      );
+      return { message: errorMessage };
+    });
 };
