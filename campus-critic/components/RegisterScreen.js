@@ -27,6 +27,10 @@ export default function LoginScreen() {
     const signUpResult = await signUp(email, password);
     if (signUpResult.message === "Success") {
       console.log("User created!", signUpResult.user);
+      await storeUserData(signUpResult.user.uid, {
+        email: email,
+        username: username,
+      });
       navigation.navigate("Home Screen");
     } else {
       setErrorMessage(signUpResult.message);
@@ -39,6 +43,7 @@ export default function LoginScreen() {
     console.log(googleSignUpResult);
     if (googleSignUpResult.message === "Success") {
       console.log("User created!", googleSignUpResult.user);
+      navigation.navigate("Home Screen");
     } else {
       setErrorMessage(googleSignUpResult.message);
       console.log(googleSignUpResult.message);

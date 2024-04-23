@@ -1,6 +1,5 @@
 import { db } from "../config/firebaseConfig.js";
-import { collection, getDocs } from "firebase/firestore";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, setDoc, collection, getDocs } from "firebase/firestore";
 
 export const getPlaces = async (college, type) => {
   const querySnapshot = await getDocs(collection(db, "places", college, type));
@@ -11,4 +10,13 @@ export const getPlaces = async (college, type) => {
     places.push(data);
   });
   console.log(places);
+};
+
+export const storeUserData = async (uid, data) => {
+  try {
+    await setDoc(doc(db, "users", uid), data);
+    console.log("User Info successfully Saved!");
+  } catch (e) {
+    console.error("Error writing document: ", e);
+  }
 };

@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
+import { storeUserData } from "./dbMethods";
 
 export const signUp = async (email, pass) => {
   // RE ensures password has 1 special character, 1 uppercase/lowercase letter, 1 num, and is at least 8 characters long
@@ -23,7 +24,7 @@ export const signUp = async (email, pass) => {
       );
       const user = userCredential.user;
       console.log("User created!", user);
-      return { message: "Success", user: "user" };
+      return { message: "Success", user: user };
     } catch (error) {
       return { message: error.message };
     }
@@ -49,7 +50,7 @@ export const signIn = async (email, pass) => {
 
 export const signUpGoogle = async () => {
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
+  return signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
