@@ -4,3 +4,4 @@ node_modules
 campus-critic\node_modules
 campus-critic\.env
 .expo/
+backend/firebase_key_campus_critic.json
