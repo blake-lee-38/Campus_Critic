@@ -11,7 +11,6 @@ import HomeScreen from "./components/HomeScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
-  console.log("App.js is running!");
   return (
     <NavigationContainer>
       <Stack.Navigator>
