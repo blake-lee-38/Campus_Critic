@@ -9,6 +9,7 @@ import {
 import colors from "../assets/colors/colors"; // Assuming you have color definitions here
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 import { signUp, signUpGoogle } from "../methods/auth";
+import { storeUserData } from "../methods/dbMethods";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
