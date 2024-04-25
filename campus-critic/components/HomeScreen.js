@@ -9,6 +9,9 @@ export default function SplashScreen({ navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         {/* Logo and Title Group */}
+        <Text style={styles.hiUserFirst}>
+          {`Hi, UserFirst!`}
+          </Text>
         <View style={styles.logoTitleGroup}>
           <Image
             source={require("../assets/images/critic-logo.png")}
@@ -57,41 +60,31 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
-  button: {
-    width: 331,
-    height: 56,
-    marginBottom: 10, // Space between buttons
-    justifyContent: "center",
-    shadowColor: "rgba(0, 0, 0, 0.25)",
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 4 },
+  root: {
+    width: 305.12799,
+    height: 80,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    rowGap: 6,
+    columnGap: 6,
+    flexShrink: 0,
   },
-  loginButtonBack: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 8,
-    backgroundColor: colors.primary,
-    justifyContent: "center",
-  },
-  registerButtonBack: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: colors.primary,
-    backgroundColor: colors.white,
-    justifyContent: "center",
-  },
-  login: {
-    color: colors.white,
-    textAlign: "center",
-    fontSize: 15,
-    fontWeight: "600",
-  },
-  register: {
+  hiUserFirst: {
+    width: 305.12799,
     color: colors.primary,
-    textAlign: "center",
-    fontSize: 15,
-    fontWeight: "600",
+    fontFamily: 'Urbanist',
+    fontSize: 42,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    letterSpacing: -0.42,
+  },
+  letsExploreTownNameHere: {
+    width: 305.12799,
+    color: colors.secondary,
+    fontFamily: 'Urbanist',
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '600',
   },
 });
