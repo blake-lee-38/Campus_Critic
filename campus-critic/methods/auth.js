@@ -4,8 +4,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "../config/firebaseConfig";
-import { storeUserData } from "./dbMethods";
+import { auth, app } from "../config/firebaseConfig";
 
 export const signUp = async (email, pass) => {
   // RE ensures password has 1 special character, 1 uppercase/lowercase letter, 1 num, and is at least 8 characters long
@@ -49,7 +48,7 @@ export const signIn = async (email, pass) => {
 };
 
 export const signUpGoogle = async () => {
-  const provider = new GoogleAuthProvider();
+  let provider = new GoogleAuthProvider(app);
   return signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.

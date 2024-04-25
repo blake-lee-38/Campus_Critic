@@ -1,6 +1,12 @@
 from flask import Flask, jsonify, app, request
 from flask_cors import CORS, cross_origin
 import requests
+
+import google.generativeai as genai
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from firebase_admin.firestore import FieldFilter
 #from models import restaurants, reviews
 # Use models with fields generated in a SQL database, requires Firebase update / functionality review
 
@@ -75,14 +81,35 @@ def get_restaurant_reviews(request, postID, pageNum):
 
     return reviewsPayload
 
-def callAPI():
-    import google.generativeai as genai
+def get_api(where, userID):
+    cred = credentials.Certificate(r"./firebase_key_campus_critic.json")
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    dbResults = db.collection('reviews').where(filter=FieldFilter('user_id', '==', userID)).stream()
+    formattedReview = ""
+    for review in dbResults:
+        review = review.to_dict()
+        '''
+        d = {'place_id': review['body']}
+        l = {}
+        data = request.json
+        for i in d:
+            restaurantID = data.get(i).__str__()
+
+            # Find the Restaurant ID model on the SQL database
+            # SQL Implementation, requires Firebase update / functionality review
+            restaurantData = restaurants.objects.get(pk=restaurantID)
+            restaurantName = restaurantData.name
+        '''
+        formattedReview = formattedReview + review['body']
 
     genai.configure(api_key='AIzaSyDb9jb3yDjICQLaKLVxjZEIzl1YrPmt7Tw')
     model = genai.GenerativeModel('gemini-pro')
-    response = model.generate_content("Someone likes panda express. Make a suggestion on one other restaurant they should "
-                                  "try. You dont need to give me the why.")
+    userReview2 = "Based on these reviews" + formattedReview + ", suggest 5 new " + where + ("for me to try. Also give "
+                                                                                             "it in list format with "
+                                                                                             "no reasons why")
 
+    response = model.generate_content(userReview2)
     print(response.text)
     
 
