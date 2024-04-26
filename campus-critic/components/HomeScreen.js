@@ -1,10 +1,19 @@
 import * as React from "react";
-import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../assets/colors/colors";
-import LoginScreen from "./LoginScreen";
+import { auth } from "../config/firebaseConfig";
 
-export default function SplashScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  const user = route.params.user;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -18,8 +27,10 @@ export default function SplashScreen({ navigation }) {
         </View>
 
         <Text style={styles.campusCritic}>
-          Welcome to the Home Screen User!
+          Welcome to the Home Screen {user ? user.firstName : null}!
         </Text>
+
+        <Button onPress={() => auth.signOut()} title="Sign Out" />
       </View>
     </SafeAreaView>
   );

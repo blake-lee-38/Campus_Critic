@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, app, request
 from flask_cors import CORS, cross_origin
 import requests
+
 #from models import restaurants, reviews
 # Use models with fields generated in a SQL database, requires Firebase update / functionality review
 

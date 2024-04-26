@@ -1,5 +1,5 @@
 import { db } from "../config/firebaseConfig.js";
-import { doc, setDoc, collection, getDocs } from "firebase/firestore";
+import { doc, setDoc, collection, getDocs, getDoc } from "firebase/firestore";
 
 export const getPlaces = async (college, type) => {
   const querySnapshot = await getDocs(collection(db, "places", college, type));
@@ -18,5 +18,17 @@ export const storeUserData = async (uid, data) => {
     console.log("User Info successfully Saved!");
   } catch (e) {
     console.error("Error writing document: ", e);
+  }
+};
+
+export const getUser = async (uid) => {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data());
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
   }
 };
