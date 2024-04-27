@@ -16,8 +16,9 @@ export default function HomeScreen({ navigation }) {
     { icon: "fast-food-outline", label: "Food" },
     { icon: "cafe-outline", label: "Coffee" },
     { icon: "barbell-outline", label: "Gym" },
-    { icon: "book-outline", label: "Study" },
+    { icon: "book-outline", label: "Library" },
     { icon: "ice-cream-outline", label: "Desserts" },
+    { icon: "beer-outline", label: "Bars" },
     { icon: "ellipsis-horizontal", label: "More" }
   ];
 
@@ -40,7 +41,10 @@ export default function HomeScreen({ navigation }) {
             containerStyle={styles.searchContainer}
             inputStyle={styles.searchInput}
           />
-          <ScrollView horizontal={true} style={styles.categoriesContainer}>
+          <ScrollView horizontal={true} 
+          showsHorizontalScrollIndicator={false} 
+          style={styles.categoriesContainer}
+          contentContainerStyle={{ paddingHorizontal: 21 }}>
             {categories.map((category, index) => (
               <View key={index} style={styles.categoryWrapper}>
                 <TouchableOpacity style={styles.categoryButton}>
@@ -51,6 +55,13 @@ export default function HomeScreen({ navigation }) {
                 </Text>
               </View>
             ))}
+          </ScrollView>
+          <Text style={styles.heading}>
+            {`My Recent Reviews`}
+          </Text>
+          <ScrollView horizontal={true}
+          showsHorizontalScrollIndicator={true}>
+            
           </ScrollView>
         </View>
       </ScrollView>
@@ -91,6 +102,14 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start', // Add this line to align text to the left
     marginLeft: 30, // Adjust this value to set your desired margin from the left
   },
+  heading: {
+    color: colors.secondary,
+    fontSize: 20,
+    fontWeight: '700',
+    alignSelf: 'flex-start', // This will align the text to the left
+    marginLeft: 30, // This value sets your desired margin from the left, keeping it consistent with the ScrollView padding
+    width: '100%', // You might need to set a width of 100% if alignSelf doesn't work as expected.
+  },
   search: {
     width: 330,
     height: 50,
@@ -130,7 +149,7 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontSize: 16,
     fontWeight: '600',
-    marginTop: 5,
+    marginTop: 7,
     marginBottom: 20,
   },
 });
