@@ -1,29 +1,59 @@
 import * as React from "react";
-import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { SearchBar } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 import colors from "../assets/colors/colors";
-import LoginScreen from "./LoginScreen";
 
-export default function SplashScreen({ navigation }) {
+export default function HomeScreen({ navigation }) {
+  const [search, setSearch] = React.useState('');
+
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+
+  // Array of category details
+  const categories = [
+    { icon: "fast-food-outline", label: "Food" },
+    { icon: "cafe-outline", label: "Coffee" },
+    { icon: "barbell-outline", label: "Gym" },
+    { icon: "book-outline", label: "Study" },
+    { icon: "ice-cream-outline", label: "Desserts" },
+    { icon: "ellipsis-horizontal", label: "More" }
+  ];
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        {/* Logo and Title Group */}
-        <Text style={styles.hiUserFirst}>
-          {`Hi, UserFirst!`}
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <View style={styles.container}>
+          <Text style={styles.hiUserFirst}>
+            {`Hi, UserFirst!`}
           </Text>
-        <View style={styles.logoTitleGroup}>
-          <Image
-            source={require("../assets/images/critic-logo.png")}
-            style={styles.logo}
+          <Text style={styles.subHeading}>
+            {`Let’s explore townNameHere.`}
+          </Text>
+          <SearchBar
+            placeholder="Search for restaurants, cafes, and more"
+            onChangeText={updateSearch}
+            value={search}
+            lightTheme
+            inputContainerStyle={styles.search}
+            containerStyle={styles.searchContainer}
+            inputStyle={styles.searchInput}
           />
-          <Text style={styles.campusCritic}>Campus Critic</Text>
+          <ScrollView horizontal={true} style={styles.categoriesContainer}>
+            {categories.map((category, index) => (
+              <View key={index} style={styles.categoryWrapper}>
+                <TouchableOpacity style={styles.categoryButton}>
+                  <Ionicons name={category.icon} size={45} style={styles.iconFormat} />
+                </TouchableOpacity>
+                <Text style={styles.categoryText}>
+                  {category.label}
+                </Text>
+              </View>
+            ))}
+          </ScrollView>
         </View>
-
-        <Text style={styles.campusCritic}>
-          Welcome to the Home Screen User!
-        </Text>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -35,56 +65,73 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-  container: {
-    width: "100%",
-    alignItems: "center",
-    paddingVertical: 20,
-  },
-  logoTitleGroup: {
-    alignItems: "center",
-    marginBottom: 100, // Space between logo/title and buttons
-  },
-  buttonsGroup: {
-    width: "100%",
-    alignItems: "center",
-  },
-  logo: {
-    width: 200,
-    height: 200,
-  },
-  campusCritic: {
-    color: colors.primary,
-    fontSize: 42,
-    fontWeight: "700",
-    letterSpacing: -0.42,
-    textAlign: "center",
-    paddingHorizontal: 20,
-  },
-  root: {
-    width: 305.12799,
-    height: 80,
-    flexDirection: 'column',
+  scrollViewContainer: {
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    rowGap: 6,
-    columnGap: 6,
-    flexShrink: 0,
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.background,
+    width: '100%',
   },
   hiUserFirst: {
-    width: 305.12799,
     color: colors.primary,
-    fontFamily: 'Urbanist',
     fontSize: 42,
-    fontStyle: 'normal',
     fontWeight: '700',
-    letterSpacing: -0.42,
+    marginTop: 30,
+    alignSelf: 'flex-start', // Add this line to align text to the left
+    marginLeft: 30, // Adjust this value to set your desired margin from the left
   },
-  letsExploreTownNameHere: {
-    width: 305.12799,
+  subHeading: {
     color: colors.secondary,
-    fontFamily: 'Urbanist',
     fontSize: 16,
-    fontStyle: 'normal',
     fontWeight: '600',
+    marginBottom: 20,
+    alignSelf: 'flex-start', // Add this line to align text to the left
+    marginLeft: 30, // Adjust this value to set your desired margin from the left
+  },
+  search: {
+    width: 330,
+    height: 50,
+    backgroundColor: colors.placeholderGray,
+    borderRadius: 25,
+  },
+  searchContainer: {
+    backgroundColor: 'transparent',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    shadowColor: 'transparent',
+    elevation: 0,
+    padding: 0,
+  },
+  searchInput: {
+    fontSize: 16,
+  },
+  categoriesContainer: {
+    marginTop: 20,
+  },
+  categoryWrapper: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  categoryButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    width: 65,
+    height: 65,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconFormat: {
+    color: 'white',
+  },
+  categoryText: {
+    color: colors.secondary,
+    fontSize: 16,
+    fontWeight: '600',
+    marginTop: 5,
+    marginBottom: 20,
   },
 });
+
