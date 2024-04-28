@@ -56,14 +56,16 @@ export default function HomeScreen({ navigation }) {
           </ScrollView>
           <Text style={styles.heading}>My Recent Reviews</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.recentReviewsContainer}>
-            {recents.map((recent, index) => (
-              <View key={index} style={styles.recentReviewWrapper}>
-                <TouchableOpacity style={styles.recentReview}>
+          {recents.map((recent, index) => (
+            <View key={index} style={styles.recentReviewWrapper}>
+              <TouchableOpacity style={styles.recentReview}>
+                <View style={styles.recentReviewTextWrapper}>
                   <Text style={styles.recentReviewText}>{recent.name}</Text>
-                  <Text style={styles.recentReviewText}>{`Rating: ${recent.rating}`}</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
+                  <Text style={styles.recentReviewTextSmall}>{`You gave this: ${recent.rating}`}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ))}
           </ScrollView>
         </View>
       </ScrollView>
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
     width: '100%', // You might need to set a width of 100% if alignSelf doesn't work as expected.
   },
   search: {
-    width: 330,
+    width: 331,
     height: 50,
     backgroundColor: colors.placeholderGray,
     borderRadius: 25,
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
   },
   categoriesContainer: {
     marginTop: 20,
+    paddingHorizontal: 20,
   },
   categoryWrapper: {
     alignItems: 'center',
@@ -157,28 +160,52 @@ const styles = StyleSheet.create({
   recentReviewsContainer: {
     flexDirection: 'row',
     marginTop: 20,
-    // Remove paddingHorizontal if you want it to start from x=0 or adjust accordingly
+    paddingHorizontal: 20,
   },
   recentReviewWrapper: {
     alignItems: 'center',
     marginHorizontal: 10,
+    marginBottom: 20,
     width: 150, // Set a fixed width for your gray boxes
+    shadowColor: "#000", // This is the color of the shadow
+    shadowOffset: {
+      width: 0, // Horizontal shadow offset
+      height: 2, // Vertical shadow offset
+  },
+    shadowOpacity: 0.25, // The opacity of the shadow
+    shadowRadius: 3.84, // The blur radius of the shadow
+    elevation: 5, // The elevation of the shadow (for Android)
   },
   recentReview: {
-    backgroundColor: colors.placeholderGray, // Use the gray color from your color palette
+    backgroundColor: colors.placeholderGray, // background color for the top part of the box
     borderRadius: 10,
-    width: '100%', // The width will be taken from the recentReviewWrapper
-    height: 120,
-    justifyContent: 'center', // Center the content vertically
-    alignItems: 'center', // Center the content horizontally
-    padding: 10, // Add some padding for the content
+    width: '100%', // full width of the wrapper
+    height: 120, // fixed height of the box
+    justifyContent: 'flex-end', // aligns the white background text container to the bottom
+    padding: 0, // padding is now moved to the text wrapper
   },
   recentReviewText: {
-    color: colors.primary, // Set the color for text inside the gray boxes
+    color: colors.secondary, // Set the color for text inside the gray boxes
+    backgroundColor: 'white', // Set the background color to transparent
     fontSize: 14,
     fontWeight: '600',
-    textAlign: 'center', // Center the text horizontally
-    marginBottom: 5, // Space out the name and the rating
+    textAlign: 'left', // Center the text horizontally
+    marginBottom: 0, // Space out the name and the rating
+  },
+  recentReviewTextSmall: {
+    color: colors.secondary, // Set the color for text inside the gray boxes
+    backgroundColor: 'white', // Set the background color to transparent
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'left', // Center the text horizontally
+    marginBottom: 0, // Space out the name and the rating
+  },
+  recentReviewTextWrapper: {
+    width: '100%', // Take up the full width of the parent
+    backgroundColor: 'white', // Set background color to white
+    padding: 5, // Add some padding inside the white container
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10, 
   },
 });
 
