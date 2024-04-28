@@ -2,43 +2,81 @@ import React from 'react';
 
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Ratings } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../assets/colors/colors'; // Assuming this import path is correct
 
 
 export default function PlacePage({ navigation }) {
 
     return(
+        <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
             <View style={styles.imageContainer}>
                 {/*Blake Change this to the places image this rectangle is just placeholder */}
                 <Text style = {styles.rectangle}> </Text>
             </View>
             <View style={styles.buisnessNameContainer}>
-                <Text style={styles.buisnessName}>Buisness Name Here</Text>
+                <Text style={styles.buisnessName}>{place.name}</Text>
             </View>
             <View style={styles.ratingContainer}>
                 {displayRating(place)}
-                <Text style={styles.totalReviews}>{place.rating} ({place.reviews} reviews) </Text>
+                <Text style={styles.totalReviews}>{place.rating} ({place.reviews} Reviews) </Text>
             </View>
-            <View style={styles.infoRow}>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.info}>{place.category}</Text>
+            <View style={styles.categoryInfoRow}>
+                <View style={styles.categoryInfoContainer}>
+                    <Text style={styles.categoryInfo}>{place.category}</Text>
                 </View>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.info}>{place.price}</Text>
+                <View style={styles.categoryInfoContainer}>
+                    <Text style={styles.categoryInfo}>{place.price}</Text>
                 </View>
-                <View style={styles.infoContainer}>
-                    <Text style={styles.info}>0.5 Miles</Text>
+                <View style={styles.categoryInfoContainer}>
+                    <Text style={styles.categoryInfo}>0.5 Miles</Text>
                 </View>
             </View>
+            <View style={styles.placeInfoRow}>
+                <View style={styles.placeInfoContainer}>
+                    <Feather name="map-pin" size={36} color={colors.primary} />
+                    <Text style={styles.placeInfo}>{place.address}</Text>
+                </View>
+            </View>
+            <View style={styles.placeInfoRow}>
+                <View style={styles.placeInfoContainer}>
+                    <AntDesign name="clockcircleo" size={36} color={colors.primary} />  
+                    <Text style={styles.placeInfo}>Open {place.hours}</Text>
+                </View>
+            </View>
+            <View style={styles.placeInfoRow}>
+                <View style={styles.placeInfoContainer}>
+                    <Ionicons name="globe-outline" size={36} color={colors.primary} />
+                    {/*Blake Change this to the places website this is just placeholder */}
+                    <Text style={styles.placeInfo}>Website.com</Text>
+                </View>
+            </View>
+            <View style={styles.seeMoreContainer}>
+                <View style={styles.seeMoreRectangle}>
+                    <TouchableOpacity style={styles.seeMoreTextBox}>
+                        <Text style={styles.seeMore}>See More</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+                <TouchableOpacity style={styles.addReviewButton}>
+                    <Feather name="plus-circle" size={36} color={colors.white} />
+                    <Text style={styles.addReviewButtonText}>Add A Review</Text>
+                </TouchableOpacity>
+
         </View>
+        </ScrollView>
 
     );
 
 }
 
 const styles = StyleSheet.create({
+
+    scrollView: {
+        flex: 1,
+        width: '100%',
+      },
     container: {
         width: "100%",
         alignItems: "center",
@@ -47,7 +85,7 @@ const styles = StyleSheet.create({
       },
     imageContainer: {
         flexDirection: 'row',
-        width: 393,
+        width: "100%",
         height: 245,
         justifyContent: 'center',
         alignItems: 'center',
@@ -56,7 +94,7 @@ const styles = StyleSheet.create({
     
     buisnessNameContainer:{
         flexDirection: 'row',
-        width: 370,
+        width: "100%",
         height: 110,
         justifyContent: 'center',
         alignItems: 'center',
@@ -75,10 +113,10 @@ const styles = StyleSheet.create({
       },
 
     rectangle: {
-        width: 393,
+        width: "100%",
         height: 245,
         flexShrink: 0,
-        backgroundColor: colors.gray,
+        backgroundColor: colors.lightGray,
       },
     
     ratingContainer:{
@@ -98,7 +136,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
 
-    infoRow:{
+    categoryInfoRow:{
         flexDirection: 'row',
         width: 350,
         justifyContent: 'space-between',
@@ -107,8 +145,8 @@ const styles = StyleSheet.create({
         
     },
     
-    infoContainer:{
-        width: 87,
+    categoryInfoContainer:{
+        width: 100,
         height: 34,
         flexShrink: 0,
         borderRadius: 25,
@@ -117,60 +155,150 @@ const styles = StyleSheet.create({
         backgroundColor: colors.placeholderGray,
     },
 
-    info: {
+    categoryInfo: {
         color: colors.darkGray,
         fontFamily: 'Urbanist',
         fontSize: 14,
         fontStyle: 'normal',
         fontWeight: '600',
-        alignContent: 'center',
-    },
-
-    open: {
-        color: colors.open,
-        fontFamily: 'Urbanist',
-        fontSize: 14,
-        fontStyle: 'normal',
-        fontWeight: '600',
-        alignContent: 'center',
-    },
-
-    closed: {
-        color: colors.darkGray,
-        fontFamily: 'Urbanist',
-        fontSize: 14,
-        fontStyle: 'normal',
-        fontWeight: '600',
-        alignContent: 'center',
-    },
         
+    },
 
+    placeInfoRow: {
+        paddingVertical: 10,
+        flexDirection: 'row',
+        width: 393,
+        alignItems: 'center', // Align items vertically
+        flexShrink: 0,
+      },
+      placeInfoContainer: {
+        flexDirection: 'row', // Arrange icon and text in a row
+        width: 393,
+        justifyContent: 'flex-start', // Align children to the start
+        alignItems: 'center', // Align items vertically
+        borderBottomWidth: 1, // Set the border bottom width
+        borderBottomColor: colors.placeholderGray, // Set the border color
+        backgroundColor: colors.background,
+        paddingHorizontal: 10, // Add some padding on the sides
+        paddingBottom: 20, // Add some padding on the bottom
+      },
+      placeInfo: {
+        
+        marginLeft: 20, // Add some margin to the left of the address text
+        // Remove the height and flexDirection as they are not necessary
+        color: colors.secondary,
+        fontFamily: 'Urbanist',
+        fontSize: 18,
+        fontWeight: '600',
+      },
+
+      seeMoreContainer: {
+        flexDirection: 'row',
+        width: 393,
+        height: 26,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: 0,
+        borderBottomColor: colors.placeholderGray,
+      },
+      seeMoreRectangle: {
+        width: 393,
+        height: 26,
+        flexShrink: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: colors.placeholderGray,
+        backgroundColor: colors.background,
+      },
+
+      seeMoreTextBox: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: 0,
+      },
+      seeMore: {
+        color: colors.darkGray,
+        fontFamily: 'Urbanist',
+        fontSize: 14,
+        fontStyle: 'normal',
+        fontWeight: '600',
+        
+      },
+
+      recentReviewsContainer: {
+        flexDirection: 'row',
+        width: 393,
+        height: 26,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexShrink: 0,
+        borderBottomColor: colors.placeholderGray,
+      },
+
+      addReviewButtonContainer: {
+        flexDirection: 'row',
+        height: 56,
+        width: 56,
+        position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }, 
+
+      addReviewButton: { 
+            flexDirection: 'row', // Arrange icon and text in a row
+            width: 250, // Diameter of the button
+            height: 56, // Diameter of the button
+            alignItems: 'center', // Center the icon horizontally
+            justifyContent: 'center', // Center the icon vertically
+            alignSelf: 'center', // Center the button horizontally
+            backgroundColor: colors.primary, // Button color
+            borderRadius: 28, // Half the width/height to make it perfectly round
+            elevation: 8, // Shadow for Android (optional)
+            shadowColor: '#000', // Shadow for iOS
+            shadowOffset: { width: 0, height: 2 }, // Shadow for iOS
+            shadowOpacity: 0.25, // Shadow for iOS
+            shadowRadius: 3.84, // Shadow for iOS
+      },
+
+        addReviewButtonText: {
+            color: colors.white, // Text color
+            fontFamily: 'Urbanist', // Font family
+            fontSize: 24, // Font size
+            fontWeight: 'bold', // Font weight
+            marginLeft: 10, // Add some margin to the left of the text
+        },
+        
+    
 
 })
 
 const place = {
-    name: "Business Name",
+    name: "Business Name Here",
     rating: 4,
     address: "123 Lindsey St",
     reviews: 5,
     category: "Restaurant",
-    hours: "3am - 5pm",
+    hours: "9AM - 8PM",
     price: "$$",
   
-  };
+  }
 
+//display the rarting of the place out of 5 stars
 function displayRating(place){
     let rating = place.rating;
     let stars = [];
-    for (let i = 0; i < 5; i){
+    for (let i = 0; i < 5; i++){
         if (rating >= 1){
             stars.push(<MaterialIcons name="star" size={36} color={colors.gold} />);
             rating--;
-        } else if (rating >= 0.5){
+        }else if (rating >= 0.5){
             stars.push(<MaterialIcons name="star-half" size={36} color={colors.gold} />);
             rating = 0;
-        } else {
-            stars.push(<MaterialIcons name="star" size={36} color={colors.lightGray} />);
+        }
+        else{
+            stars.push(<MaterialIcons name="star" size={36} color={colors.placeholderGray} />);
         }
     }
     return stars;
