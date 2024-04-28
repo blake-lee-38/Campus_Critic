@@ -11,7 +11,6 @@ export default function HomeScreen({ navigation }) {
     setSearch(search);
   };
 
-  // Array of category details
   const categories = [
     { icon: "fast-food-outline", label: "Food" },
     { icon: "cafe-outline", label: "Coffee" },
@@ -22,16 +21,20 @@ export default function HomeScreen({ navigation }) {
     { icon: "ellipsis-horizontal", label: "More" }
   ];
 
+  const recents = [
+    { name: "Place 1", rating: 4.5},
+    { name: "Place 2", rating: 3.5},
+    { name: "Place 3", rating: 4.0},
+    { name: "Place 4", rating: 5.0},
+    { name: "Place 5", rating: 2.5},
+  ];
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <View style={styles.container}>
-          <Text style={styles.hiUserFirst}>
-            {`Hi, UserFirst!`}
-          </Text>
-          <Text style={styles.subHeading}>
-            {`Let’s explore townNameHere.`}
-          </Text>
+          <Text style={styles.hiUserFirst}>Hi, UserFirst!</Text>
+          <Text style={styles.subHeading}>Let’s explore townNameHere.</Text>
           <SearchBar
             placeholder="Search for restaurants, cafes, and more"
             onChangeText={updateSearch}
@@ -41,27 +44,26 @@ export default function HomeScreen({ navigation }) {
             containerStyle={styles.searchContainer}
             inputStyle={styles.searchInput}
           />
-          <ScrollView horizontal={true} 
-          showsHorizontalScrollIndicator={false} 
-          style={styles.categoriesContainer}
-          contentContainerStyle={{ paddingHorizontal: 21 }}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.categoriesContainer}>
             {categories.map((category, index) => (
               <View key={index} style={styles.categoryWrapper}>
                 <TouchableOpacity style={styles.categoryButton}>
                   <Ionicons name={category.icon} size={45} style={styles.iconFormat} />
                 </TouchableOpacity>
-                <Text style={styles.categoryText}>
-                  {category.label}
-                </Text>
+                <Text style={styles.categoryText}>{category.label}</Text>
               </View>
             ))}
           </ScrollView>
-          <Text style={styles.heading}>
-            {`My Recent Reviews`}
-          </Text>
-          <ScrollView horizontal={true}
-          showsHorizontalScrollIndicator={true}>
-            
+          <Text style={styles.heading}>My Recent Reviews</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.recentReviewsContainer}>
+            {recents.map((recent, index) => (
+              <View key={index} style={styles.recentReviewWrapper}>
+                <TouchableOpacity style={styles.recentReview}>
+                  <Text style={styles.recentReviewText}>{recent.name}</Text>
+                  <Text style={styles.recentReviewText}>{`Rating: ${recent.rating}`}</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
           </ScrollView>
         </View>
       </ScrollView>
@@ -151,6 +153,32 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginTop: 7,
     marginBottom: 20,
+  },
+  recentReviewsContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    // Remove paddingHorizontal if you want it to start from x=0 or adjust accordingly
+  },
+  recentReviewWrapper: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    width: 150, // Set a fixed width for your gray boxes
+  },
+  recentReview: {
+    backgroundColor: colors.placeholderGray, // Use the gray color from your color palette
+    borderRadius: 10,
+    width: '100%', // The width will be taken from the recentReviewWrapper
+    height: 120,
+    justifyContent: 'center', // Center the content vertically
+    alignItems: 'center', // Center the content horizontally
+    padding: 10, // Add some padding for the content
+  },
+  recentReviewText: {
+    color: colors.primary, // Set the color for text inside the gray boxes
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'center', // Center the text horizontally
+    marginBottom: 5, // Space out the name and the rating
   },
 });
 
