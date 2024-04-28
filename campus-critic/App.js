@@ -7,13 +7,14 @@ import SplashScreen from "./components/SplashScreen";
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import HomeScreen from "./components/HomeScreen";
+import UserProfile from "./components/UserProfile";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="User Profile">
         <Stack.Screen
           name="Splash Screen"
           component={SplashScreen}
@@ -32,6 +33,11 @@ function App() {
         <Stack.Screen
           name="Home Screen"
           component={HomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="User Profile"
+          component={UserProfile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
