@@ -30,6 +30,7 @@ export default function PlacePage({ navigation }) {
                     <Text style={styles.categoryInfo}>{place.price}</Text>
                 </View>
                 <View style={styles.categoryInfoContainer}>
+                    {/*Blake Change this to the places distance from the user this is just placeholder */}
                     <Text style={styles.categoryInfo}>0.5 Miles</Text>
                 </View>
             </View>
@@ -63,7 +64,6 @@ export default function PlacePage({ navigation }) {
                     <Feather name="plus-circle" size={36} color={colors.white} />
                     <Text style={styles.addReviewButtonText}>Add A Review</Text>
                 </TouchableOpacity>
-
         </View>
         </ScrollView>
 
@@ -167,13 +167,13 @@ const styles = StyleSheet.create({
     placeInfoRow: {
         paddingVertical: 10,
         flexDirection: 'row',
-        width: 393,
+        width: "100%",
         alignItems: 'center', // Align items vertically
         flexShrink: 0,
       },
       placeInfoContainer: {
         flexDirection: 'row', // Arrange icon and text in a row
-        width: 393,
+        width: "100%", // Take up the full widths
         justifyContent: 'flex-start', // Align children to the start
         alignItems: 'center', // Align items vertically
         borderBottomWidth: 1, // Set the border bottom width
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
 
       seeMoreContainer: {
         flexDirection: 'row',
-        width: 393,
+        width: "100%",
         height: 26,
         justifyContent: 'center',
         alignItems: 'center',
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.placeholderGray,
       },
       seeMoreRectangle: {
-        width: 393,
+        width: "100%",
         height: 26,
         flexShrink: 0,
         justifyContent: 'center',
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
             fontFamily: 'Urbanist', // Font family
             fontSize: 24, // Font size
             fontWeight: 'bold', // Font weight
-            marginLeft: 10, // Add some margin to the left of the text
+            paddingHorizontal: 20, // Add some margin to the left of the text
         },
         
     
