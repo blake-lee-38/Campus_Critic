@@ -1,7 +1,15 @@
 import * as React from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView} from 'react-native';
 import colors from '../assets/colors/colors'; // Assuming you have color definitions here
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Make sure to install this package
+
+const recents = [
+    { name: "Place 1", rating: 4.5},
+    { name: "Place 2", rating: 3.5},
+    { name: "Place 3", rating: 4.0},
+    { name: "Place 4", rating: 5.0},
+    { name: "Place 5", rating: 2.5},
+  ];
 
 export default function UserProfile({ navigation }) {
   return (
@@ -22,10 +30,23 @@ export default function UserProfile({ navigation }) {
           <Icon name="email" size={20} color={colors.primary} />
           <Text style={styles.email}>email@school.edu</Text>
         </View>
-        <TouchableOpacity style={styles.logoutButton}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
       </View>
+      <Text style={styles.heading}>My Recent Reviews</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollContainer}>
+          {recents.map((recent, index) => (
+            <View key={index} style={styles.cardWrapper}>
+              <TouchableOpacity style={styles.card}>
+                <View style={styles.cardContentWrapper}>
+                  <Text style={styles.cardTitle}>{recent.name}</Text>
+                  <Text style={styles.cardSubtitle}>{`You gave this: ${recent.rating}`}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ))}
+          </ScrollView>
+          <TouchableOpacity style={styles.logoutButton}>
+          <Text style={styles.logoutButtonText}>Log Out</Text>
+        </TouchableOpacity>
     </View>
   );
 }
@@ -61,11 +82,6 @@ const styles = StyleSheet.create({
     height: 35,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: colors.black, // To give an elevation effect if needed
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2, // For Android elevation effect
     marginBottom: 30, // Adjust this value as needed to position the edit icon correctly
   },
   name: {
@@ -92,7 +108,7 @@ const styles = StyleSheet.create({
   },
   emailLabel: {
     color: colors.primary,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '600',
     marginTop: 7,
     marginBottom: 10,
@@ -104,15 +120,72 @@ const styles = StyleSheet.create({
     },
   logoutButton: {
     marginTop: 20,
+    marginBottom: 40,
     backgroundColor: colors.white,
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     borderColor: colors.primary,
-    borderWidth: 2,
+    borderWidth: 3,
+    width: '85%',
+    alignSelf: 'center',
   },
   logoutButtonText: {
     color: colors.primary,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: '600',
+    fontSize: 20,
+  },
+  cardWrapper: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    marginBottom: 20,
+    width: 150,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  card: {
+    backgroundColor: colors.placeholderGray,
+    borderRadius: 10,
+    width: '100%',
+    height: 120,
+    justifyContent: 'flex-end',
+  },
+  horizontalScrollContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+    paddingHorizontal: 20,
+  },
+  cardContentWrapper: {
+    width: '100%',
+    backgroundColor: colors.white,
+    padding: 5,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10, 
+  },
+  cardTitle: {
+    color: colors.secondary,
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'left',
+  },
+  cardSubtitle: {
+    color: colors.secondary,
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'left',
+  },
+  heading: {
+    color: colors.primary,
+    fontSize: 20,
+    fontWeight: '600',
+    alignSelf: 'flex-start',
+    marginLeft: 30,
+    width: '100%',
   },
 });
