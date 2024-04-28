@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator >
         <Stack.Screen
           name="Splash Screen"
           component={SplashScreen}
@@ -35,11 +35,7 @@ function App() {
           component={HomeScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="Place Screen"
-          component={PlacePage}
-          options={{ headerShown: false }}
-        />
+       
       </Stack.Navigator>
     </NavigationContainer>
   );

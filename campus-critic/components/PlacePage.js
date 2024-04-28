@@ -5,10 +5,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import colors from '../assets/colors/colors'; // Assuming this import path is correct
 
-
 export default function PlacePage({ navigation }) {
 
     return(
+        <SafeAreaView style={styles.safeArea}>
         <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -35,7 +35,7 @@ export default function PlacePage({ navigation }) {
                 </View>
             </View>
             <View style={styles.placeInfoRow}>
-                <View style={styles.placeInfoContainer}>
+                <View style={styles.placeInfoContainer} paddingTop={10}>
                     <Feather name="map-pin" size={36} color={colors.primary} />
                     <Text style={styles.placeInfo}>{place.address}</Text>
                 </View>
@@ -60,18 +60,40 @@ export default function PlacePage({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-                <TouchableOpacity style={styles.addReviewButton}>
-                    <Feather name="plus-circle" size={36} color={colors.white} />
-                    <Text style={styles.addReviewButtonText}>Add A Review</Text>
-                </TouchableOpacity>
+            <View style={styles.recentReviewsTextBox}>
+                <Text style={styles.recentReviewsText}>Recent Reviews</Text>
+            </View>
+        {/*Blake Change this to the places recent reviews in the place object these are just placeholders */}
+        <ScrollView horizontal= {true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView}>
+            <View style={styles.recentReviewsContainer}>
+                {displayRecentReviews(place)}
+            </View>
+        </ScrollView>
         </View>
         </ScrollView>
+        <TouchableOpacity style={styles.addReviewButton}>
+                    <Feather name="plus-circle" size={36} color={colors.white} />
+                    <Text style={styles.addReviewButtonText}>Add A Review</Text>
+        </TouchableOpacity>    
+        </SafeAreaView>
 
     );
 
 }
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: colors.background, // Assuming this is the color you want for your safe area
+      },
+
+    horizontalScrollView: {
+        flexDirection: 'row',
+        width: '100%',
+        height: 275,
+        flexShrink: 0,
+        paddingHorizontal: 20,
+    },
 
     scrollView: {
         flex: 1,
@@ -86,7 +108,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         flexDirection: 'row',
         width: "100%",
-        height: 245,
+        height: 280,
+        marginTop: -40,
         justifyContent: 'center',
         alignItems: 'center',
         flexShrink: 0,
@@ -114,7 +137,7 @@ const styles = StyleSheet.create({
 
     rectangle: {
         width: "100%",
-        height: 245,
+        height: "100%",
         flexShrink: 0,
         backgroundColor: colors.lightGray,
       },
@@ -165,7 +188,7 @@ const styles = StyleSheet.create({
     },
 
     placeInfoRow: {
-        paddingVertical: 10,
+        marginVertical: 10,
         flexDirection: 'row',
         width: "100%",
         alignItems: 'center', // Align items vertically
@@ -224,17 +247,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontStyle: 'normal',
         fontWeight: '600',
-        
-      },
-
-      recentReviewsContainer: {
-        flexDirection: 'row',
-        width: 393,
-        height: 26,
         justifyContent: 'center',
         alignItems: 'center',
-        flexShrink: 0,
-        borderBottomColor: colors.placeholderGray,
+        paddingBottom: 10,
       },
 
       addReviewButtonContainer: {
@@ -270,7 +285,51 @@ const styles = StyleSheet.create({
             paddingHorizontal: 20, // Add some margin to the left of the text
         },
         
-    
+    recentReviewsContainer: {
+        flexDirection: 'row',
+        alignItems:'left',
+        justifyContent: 'left',
+        width: '100%',
+        height: 150,
+        flexShrink: 0,
+        borderBottomColor: colors.placeholderGray,
+        
+    },
+    recentReviewsText: {
+        color: colors.secondary,
+        fontFamily: 'Urbanist',
+        fontSize: 18,
+        fontStyle: 'normal',
+        fontWeight: '600',
+        paddingVertical: 20,
+    },
+
+    recentReviewsTextBox: {
+        flexDirection: 'row',
+        alignSelf: 'left',
+        marginLeft: 20,
+        flexShrink: 0,
+    },
+
+    recentReviewsContentContainer: {
+        flexDirection: 'row',
+        width: 300,
+        height: 200,
+        flexShrink: 0,
+        justifyContent: 'left',
+        alignItems: 'left',
+        backgroundColor: colors.placeholderGray,
+        borderRadius: 25,
+        marginLeft: 20,
+    },
+
+    recentReviewsContent: {
+        fontFamily: 'Urbanist',
+        fontSize: 14,
+        fontWeight: '600',
+        padding: 20,
+        color: colors.darkGray,
+    }
 
 })
 
@@ -282,6 +341,8 @@ const place = {
     category: "Restaurant",
     hours: "9AM - 8PM",
     price: "$$",
+    website: "Website.com",
+    recentReviews: ["Review 1", "Review 2", "Review 3", "Review 4", "Review 5"],
   
   }
 
@@ -302,4 +363,18 @@ function displayRating(place){
         }
     }
     return stars;
+}
+
+function displayRecentReviews(place){
+    let reviews = place.recentReviews;
+    let reviewContent = [];
+    for (let i = 0; i < reviews.length; i++){
+        reviewContent.push(
+            <View style={styles.recentReviewsContentContainer}>
+                <Text style={styles.recentReviewsContent}>{reviews[i]}</Text>
+            </View>
+        );
+    }
+
+    return reviewContent;
 }
