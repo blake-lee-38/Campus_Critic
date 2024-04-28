@@ -29,6 +29,22 @@ export default function HomeScreen({ navigation }) {
     { name: "Place 5", rating: 2.5},
   ];
 
+  const popular = [
+    { name: "Place 1", category: "Food"},
+    { name: "Place 2", category: "Coffee"},
+    { name: "Place 3", category: "Gym"},
+    { name: "Place 4", category: "Food"},
+    { name: "Place 5", category: "Desserts"},
+  ];
+
+  const topPicks = [
+    { name: "Place 1", rating: 4.5},
+    { name: "Place 2", rating: 3.5},
+    { name: "Place 3", rating: 4.0},
+    { name: "Place 4", rating: 5.0},
+    { name: "Place 5", rating: 2.5},
+  ];
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -55,13 +71,39 @@ export default function HomeScreen({ navigation }) {
             ))}
           </ScrollView>
           <Text style={styles.heading}>My Recent Reviews</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.recentReviewsContainer}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollContainer}>
           {recents.map((recent, index) => (
-            <View key={index} style={styles.recentReviewWrapper}>
-              <TouchableOpacity style={styles.recentReview}>
-                <View style={styles.recentReviewTextWrapper}>
-                  <Text style={styles.recentReviewText}>{recent.name}</Text>
-                  <Text style={styles.recentReviewTextSmall}>{`You gave this: ${recent.rating}`}</Text>
+            <View key={index} style={styles.cardWrapper}>
+              <TouchableOpacity style={styles.card}>
+                <View style={styles.cardContentWrapper}>
+                  <Text style={styles.cardTitle}>{recent.name}</Text>
+                  <Text style={styles.cardSubtitle}>{`You gave this: ${recent.rating}`}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ))}
+          </ScrollView>
+          <Text style={styles.heading}>Popular Near You</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollContainer}>
+          {popular.map((popular, index) => (
+            <View key={index} style={styles.cardWrapper}>
+              <TouchableOpacity style={styles.card}>
+                <View style={styles.cardContentWrapper}>
+                  <Text style={styles.cardTitle}>{popular.name}</Text>
+                  <Text style={styles.cardSubtitle}>{popular.category}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          ))}
+          </ScrollView>
+          <Text style={styles.heading}>Top Picks for You</Text>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollContainer}>
+          {topPicks.map((topPicks, index) => (
+            <View key={index} style={styles.cardWrapper}>
+              <TouchableOpacity style={styles.card}>
+                <View style={styles.cardContentWrapper}>
+                  <Text style={styles.cardTitle}>{topPicks.name}</Text>
+                  <Text style={styles.cardSubtitle}>{`Rating: ${topPicks.rating}`}</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -95,27 +137,27 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontWeight: '700',
     marginTop: 30,
-    alignSelf: 'flex-start', // Add this line to align text to the left
-    marginLeft: 30, // Adjust this value to set your desired margin from the left
+    alignSelf: 'flex-start',
+    marginLeft: 30,
   },
   subHeading: {
     color: colors.secondary,
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 20,
-    alignSelf: 'flex-start', // Add this line to align text to the left
-    marginLeft: 30, // Adjust this value to set your desired margin from the left
+    alignSelf: 'flex-start',
+    marginLeft: 30,
   },
   heading: {
     color: colors.secondary,
     fontSize: 20,
     fontWeight: '700',
-    alignSelf: 'flex-start', // This will align the text to the left
-    marginLeft: 30, // This value sets your desired margin from the left, keeping it consistent with the ScrollView padding
-    width: '100%', // You might need to set a width of 100% if alignSelf doesn't work as expected.
+    alignSelf: 'flex-start',
+    marginLeft: 30,
+    width: '100%',
   },
   search: {
-    width: 331,
+    width: 330,
     height: 50,
     backgroundColor: colors.placeholderGray,
     borderRadius: 25,
@@ -157,55 +199,49 @@ const styles = StyleSheet.create({
     marginTop: 7,
     marginBottom: 20,
   },
-  recentReviewsContainer: {
+  horizontalScrollContainer: {
     flexDirection: 'row',
     marginTop: 20,
     paddingHorizontal: 20,
   },
-  recentReviewWrapper: {
+  cardWrapper: {
     alignItems: 'center',
     marginHorizontal: 10,
     marginBottom: 20,
-    width: 150, // Set a fixed width for your gray boxes
-    shadowColor: "#000", // This is the color of the shadow
+    width: 150,
+    shadowColor: "#000",
     shadowOffset: {
-      width: 0, // Horizontal shadow offset
-      height: 2, // Vertical shadow offset
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-    shadowOpacity: 0.25, // The opacity of the shadow
-    shadowRadius: 3.84, // The blur radius of the shadow
-    elevation: 5, // The elevation of the shadow (for Android)
-  },
-  recentReview: {
-    backgroundColor: colors.placeholderGray, // background color for the top part of the box
+  card: {
+    backgroundColor: colors.placeholderGray,
     borderRadius: 10,
-    width: '100%', // full width of the wrapper
-    height: 120, // fixed height of the box
-    justifyContent: 'flex-end', // aligns the white background text container to the bottom
-    padding: 0, // padding is now moved to the text wrapper
+    width: '100%',
+    height: 120,
+    justifyContent: 'flex-end',
   },
-  recentReviewText: {
-    color: colors.secondary, // Set the color for text inside the gray boxes
-    backgroundColor: 'white', // Set the background color to transparent
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'left', // Center the text horizontally
-    marginBottom: 0, // Space out the name and the rating
-  },
-  recentReviewTextSmall: {
-    color: colors.secondary, // Set the color for text inside the gray boxes
-    backgroundColor: 'white', // Set the background color to transparent
-    fontSize: 12,
-    fontWeight: '600',
-    textAlign: 'left', // Center the text horizontally
-    marginBottom: 0, // Space out the name and the rating
-  },
-  recentReviewTextWrapper: {
-    width: '100%', // Take up the full width of the parent
-    backgroundColor: 'white', // Set background color to white
-    padding: 5, // Add some padding inside the white container
+  cardContentWrapper: {
+    width: '100%',
+    backgroundColor: colors.white,
+    padding: 5,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10, 
   },
+  cardTitle: {
+    color: colors.secondary,
+    fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'left',
+  },
+  cardSubtitle: {
+    color: colors.secondary,
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'left',
+  },
 });
-
