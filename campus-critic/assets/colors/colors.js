@@ -6,8 +6,9 @@ const colors = {
     border: '#E8ECF4',
     gray: '#8391A1',    
     darkGray: '#6A707C',
-    star: '#FFCB45',
+    lightGray: '#F7F8F9',
     placeholderGray: '#EEEEEE',
+    star: '#FFCB45',
     textBack: '#F6F6F6',
     open: '#008405',
 }

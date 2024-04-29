@@ -9,6 +9,7 @@ import SplashScreen from "./components/SplashScreen";
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import HomeScreen from "./components/HomeScreen";
+import UserProfile from "./components/UserProfile";
 import colors from "../campus-critic/assets/colors/colors.js";
 
 const Stack = createNativeStackNavigator();
@@ -73,6 +74,11 @@ function App() {
         <Stack.Screen
           name="Home Screen"
           component={TabScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="User Profile"
+          component={UserProfile}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
