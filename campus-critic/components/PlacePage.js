@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
 
     buisnessName: {
-        width: 370,
+        width: "100%",
         flexShrink: 0,
         color: colors.primary,
         fontFamily: 'Urbanist',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     
     ratingContainer:{
         flexDirection: 'row',
-        width: 395,
+        width: "100%",
         paddingLeft: 10,
         justifyContent: 'left',
         flexShrink: 0,
