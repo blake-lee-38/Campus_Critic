@@ -3,8 +3,10 @@ import { View, StyleSheet, ScrollView, Text, TouchableOpacity, SafeAreaView } fr
 import { SearchBar } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../assets/colors/colors";
+import { auth } from "../config/firebaseConfig";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  const user = route.params.user;
   const [search, setSearch] = React.useState('');
 
   const updateSearch = (search) => {
