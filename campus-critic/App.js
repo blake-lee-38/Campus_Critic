@@ -10,10 +10,13 @@ import SplashScreen from "./components/SplashScreen";
 import LoginScreen from "./components/LoginScreen";
 import RegisterScreen from "./components/RegisterScreen";
 import HomeScreen from "./components/HomeScreen";
+import PlacePage from "./components/PlacePage";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebaseConfig";
 import { getUser } from "./methods/dbMethods";
-
+import ReviewScreen from "./components/ReviewScreen";
+import CategoryScreen from "./components/CategoryScreen.js";
+import RecScreen from "./components/RecScreen.js";
 const LoginStack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -29,8 +32,18 @@ function InsideLayout(user) {
         options={{ headerShown: false }}
       />
       <InsideStack.Screen
-        name="User Profile"
-        component={UserProfile}
+        name="Place Page"
+        component={PlacePage}
+        options={{ headerShown: false }}
+      />
+      <InsideStack.Screen
+        name="Review Screen"
+        component={ReviewScreen}
+        options={{ headerShown: false }}
+      />
+      <InsideStack.Screen
+        name="Category Screen"
+        component={CategoryScreen}
         options={{ headerShown: false }}
       />
     </InsideStack.Navigator>
@@ -71,8 +84,8 @@ function TabScreen({ route }) {
 
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "AddReview") {
-            iconName = focused ? "add-circle" : "add-circle-outline";
+          } else if (route.name === "AI Recommendations") {
+            iconName = focused ? "sparkles" : "sparkles-outline";
           } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person-outline";
           }
@@ -96,10 +109,16 @@ function TabScreen({ route }) {
         initialParams={{ user: user }}
       />
       <Tab.Screen
+        name="AI Recommendations"
+        component={RecScreen}
+        initialParams={{ user: user }}
+      />
+      <Tab.Screen
         name="Profile"
         component={UserProfile}
         initialParams={{ user: user }}
       />
+
       {/* Add the AddReviewScreen component */}
       {/* Add the ProfileScreen component */}
     </Tab.Navigator>

@@ -82,6 +82,10 @@ export default function HomeScreen({ navigation, route }) {
     { name: "Place 5", rating: 2.5 },
   ];
 
+  function navigatePlace(place) {
+    navigation.navigate("Place Page", { place: place, user: user });
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       {loading ? (
@@ -109,7 +113,15 @@ export default function HomeScreen({ navigation, route }) {
             >
               {categories.map((category, index) => (
                 <View key={index} style={styles.categoryWrapper}>
-                  <TouchableOpacity style={styles.categoryButton}>
+                  <TouchableOpacity
+                    style={styles.categoryButton}
+                    onPress={() => {
+                      navigation.navigate("Category Screen", {
+                        category: category,
+                        user: user,
+                      });
+                    }}
+                  >
                     <Ionicons
                       name={category.icon}
                       size={45}
@@ -138,7 +150,10 @@ export default function HomeScreen({ navigation, route }) {
             >
               {reviewData.map((recent, index) => (
                 <View key={index} style={styles.cardWrapper}>
-                  <TouchableOpacity style={styles.card}>
+                  <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => navigatePlace(recent)}
+                  >
                     <Image
                       source={{
                         uri:
@@ -171,7 +186,10 @@ export default function HomeScreen({ navigation, route }) {
             >
               {otherPlaces.map((popular, index) => (
                 <View key={index} style={styles.cardWrapper}>
-                  <TouchableOpacity style={styles.card}>
+                  <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => navigatePlace(popular)}
+                  >
                     <Image
                       source={{
                         uri:
@@ -204,7 +222,10 @@ export default function HomeScreen({ navigation, route }) {
             >
               {otherPlaces.map((topPicks, index) => (
                 <View key={index} style={styles.cardWrapper}>
-                  <TouchableOpacity style={styles.card}>
+                  <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => navigatePlace(topPicks)}
+                  >
                     <Image
                       source={{
                         uri:

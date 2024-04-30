@@ -45,16 +45,6 @@ export default function SplashScreen({ navigation }) {
               <Text style={styles.register}>Register</Text>
             </View>
           </TouchableOpacity>
-          <Pressable
-            style={styles.button}
-            onPress={async () =>
-              await getPlaces("univ_of_oklahoma", "restaurant")
-            }
-          >
-            <View style={styles.registerButtonBack}>
-              <Text style={styles.register}>Get Places</Text>
-            </View>
-          </Pressable>
         </View>
       </View>
     </SafeAreaView>
