@@ -125,29 +125,6 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator >
-        <Stack.Screen
-          name="Splash Screen"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login Screen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register Screen"
-          component={RegisterScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Home Screen"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-       
-      </Stack.Navigator>
       {user ? InsideLayout(user) : LoginLayout()}
     </NavigationContainer>
   );
