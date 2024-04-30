@@ -135,7 +135,7 @@ const typeFormat = {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.background, // Assuming this is the color you want for your safe area
+    backgroundColor: colors.background, 
   },
 
   horizontalScrollView: {
@@ -253,7 +253,6 @@ const styles = StyleSheet.create({
   },
   placeInfo: {
     marginLeft: 20, // Add some margin to the left of the address text
-    // Remove the height and flexDirection as they are not necessary
     color: colors.secondary,
     fontSize: 18,
     fontWeight: "600",
@@ -305,26 +304,26 @@ const styles = StyleSheet.create({
   },
 
   addReviewButton: {
-    flexDirection: "row", // Arrange icon and text in a row
-    width: 250, // Diameter of the button
-    height: 56, // Diameter of the button
-    alignItems: "center", // Center the icon horizontally
-    justifyContent: "center", // Center the icon vertically
-    alignSelf: "center", // Center the button horizontally
-    backgroundColor: colors.primary, // Button color
-    borderRadius: 28, // Half the width/height to make it perfectly round
-    elevation: 8, // Shadow for Android (optional)
-    shadowColor: "#000", // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 }, // Shadow for iOS
-    shadowOpacity: 0.25, // Shadow for iOS
-    shadowRadius: 3.84, // Shadow for iOS
+    flexDirection: "row", 
+    width: 250, 
+    height: 56, 
+    alignItems: "center", 
+    justifyContent: "center", 
+    alignSelf: "center", 
+    backgroundColor: colors.primary, 
+    borderRadius: 28, 
+    elevation: 8, 
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.25, 
+    shadowRadius: 3.84, 
   },
 
   addReviewButtonText: {
-    color: colors.white, // Text color
-    fontSize: 24, // Font size
-    fontWeight: "bold", // Font weight
-    paddingHorizontal: 20, // Add some margin to the left of the text
+    color: colors.white, 
+    fontSize: 24, 
+    fontWeight: "bold", 
+    paddingHorizontal: 20, 
   },
 
   recentReviewsContainer: {
@@ -389,11 +388,11 @@ function displayRating(place) {
   let stars = [];
   for (let i = 0; i < 5; i++) {
     if (rating >= 1) {
-      stars.push(<MaterialIcons name="star" size={36} color={colors.gold} />);
+      stars.push(<MaterialIcons name="star" size={36} color={colors.star} />);
       rating--;
     } else if (rating >= 0.5) {
       stars.push(
-        <MaterialIcons name="star-half" size={36} color={colors.gold} />
+        <MaterialIcons name="star-half" size={36} color={colors.star} />
       );
       rating = 0;
     } else {
