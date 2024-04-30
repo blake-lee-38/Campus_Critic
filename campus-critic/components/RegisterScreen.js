@@ -38,15 +38,7 @@ export default function LoginScreen() {
   const handleRegister = async () => {
     setLoading(true);
     // Implement your register functionality here
-    if (
-      college === null ||
-      firstName === "" ||
-      lastName === "" ||
-      username === "" ||
-      email === "" ||
-      password === "" ||
-      confirmPassword === ""
-    ) {
+    if (college === null || firstName === "" || confirmPassword === "") {
       setErrorMessage("Please fill out all fields");
       setLoading(false);
       return;

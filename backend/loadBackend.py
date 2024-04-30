@@ -7,9 +7,6 @@ import requests
 MAPS_KEY = "AIzaSyAI5kG4qxfsry5Tnw09xQmmm5elqU3TKxk"
 
 # Initialize Firestore DB
-cred = credentials.Certificate(r"./firebase_key_campus_critic.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
 
 # Initialize Colleges to Search
 colleges = {}
