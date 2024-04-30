@@ -71,9 +71,9 @@ const getPopularPlaces = async (user) => {
   let popularPlaces = [];
   restaurantSnapshot.forEach((doc) => {
     const data = doc.data();
+    data["id"] = doc.id;
     popularPlaces.push(data);
   });
-  console.log(popularPlaces);
   return popularPlaces;
 };
 
@@ -83,6 +83,7 @@ const getReviewPlaces = async (user, reviews) => {
     const docRef = doc(db, "places", user.college, review.type, review.id);
     const docSnap = await getDoc(docRef);
     const data = docSnap.data();
+    data["id"] = docSnap.id;
     data["userRating"] = review.rating;
     reviewData.push(data);
   }
@@ -101,6 +102,22 @@ const getPastReviews = async (uid) => {
       rating: doc.data().rating,
       type: doc.data().type,
     };
+    places.push(data);
+  });
+  return places;
+};
+
+export const postReview = async (data) => {};
+
+export const getCategoryData = async (category, college) => {
+  const querySnapshot = await getDocs(
+    collection(db, "places", college, category)
+  );
+  let places = [];
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    const data = doc.data();
+    data["id"] = doc.id;
     places.push(data);
   });
   return places;

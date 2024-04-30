@@ -13,6 +13,9 @@ from firebase_admin.firestore import FieldFilter
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+cred = credentials.Certificate(r"./firebase_key_campus_critic.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 
 @app.route('/api/get_restaurants', methods=['POST'])
@@ -81,14 +84,18 @@ def get_restaurant_reviews(request, postID, pageNum):
 
     return reviewsPayload
 
-def get_api(where, userID):
-    cred = credentials.Certificate(r"./firebase_key_campus_critic.json")
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    dbResults = db.collection('reviews').where(filter=FieldFilter('user_id', '==', userID)).stream()
+@app.route('/api/get_ai_recs', methods=['POST'])
+def get_ai_recs():
+    userID = request.args.get('userID')
+    category = request.args.get('category').__str__()
+    where = request.args.get('where').__str__()
+    print(userID)
+    print(category)
+    dbResults = db.collection('reviews').where(filter=FieldFilter('user_id', '==', userID)).where(filter=FieldFilter('type', '==', category)).stream()
     formattedReview = ""
     for review in dbResults:
         review = review.to_dict()
+        newReview = 'Rating: ' + review['rating'] + ' Review: ' + review['body'] + '\n'
         '''
         d = {'place_id': review['body']}
         l = {}
@@ -101,16 +108,17 @@ def get_api(where, userID):
             restaurantData = restaurants.objects.get(pk=restaurantID)
             restaurantName = restaurantData.name
         '''
-        formattedReview = formattedReview + review['body']
+        formattedReview = formattedReview + newReview
 
     genai.configure(api_key='AIzaSyDb9jb3yDjICQLaKLVxjZEIzl1YrPmt7Tw')
     model = genai.GenerativeModel('gemini-pro')
-    userReview2 = "Based on these reviews" + formattedReview + ", suggest 5 new " + where + ("for me to try. Also give "
+    userReview2 = "Based on these reviews" + formattedReview + ", suggest 5 new " + category + ("for me to try in ") + where + (". Also give "
                                                                                              "it in list format with "
                                                                                              "no reasons why")
 
     response = model.generate_content(userReview2)
-    print(response.text)
+    print(response)
+    #return jsonify({'response': response})
     
 
 if __name__ == "__main__":
