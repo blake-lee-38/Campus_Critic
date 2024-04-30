@@ -352,10 +352,10 @@ function displayRating(place){
     let stars = [];
     for (let i = 0; i < 5; i++){
         if (rating >= 1){
-            stars.push(<MaterialIcons name="star" size={36} color={colors.gold} />);
+            stars.push(<MaterialIcons name="star" size={36} color={colors.star} />);
             rating--;
         }else if (rating >= 0.5){
-            stars.push(<MaterialIcons name="star-half" size={36} color={colors.gold} />);
+            stars.push(<MaterialIcons name="star-half" size={36} color={colors.star} />);
             rating = 0;
         }
         else{
