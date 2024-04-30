@@ -1,0 +1,147 @@
+import * as React from "react";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import colors from "../assets/colors/colors";
+import LoginScreen from "./LoginScreen";
+
+export default function SplashScreen({ navigation }) {
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Logo and Title Group */}
+        <View style={styles.logoTitleGroup}>
+          <Text style={styles.campusCritic}>Business Name</Text>
+        </View>
+
+        <Image
+            source={require("../assets/images/DefaultCompanyImage.png")}
+            style={styles.CompanyImage}
+          />
+
+        <Image
+            source={require("../assets/images/ReviewStarUnfilled.png")}
+            style={styles.star}
+          />
+        <Image
+            source={require("../assets/images/ReviewStarUnfilled.png")}
+            style={styles.star}
+          />
+        <Image
+            source={require("../assets/images/ReviewStarUnfilled.png")}
+            style={styles.star}
+          />
+        <Image
+            source={require("../assets/images/ReviewStarUnfilled.png")}
+            style={styles.star}
+          />
+        <Image
+            source={require("../assets/images/ReviewStarUnfilled.png")}
+            style={styles.star}
+          />
+        
+        <HTMLForm>
+
+        </HTMLForm>
+        
+      </View>
+    </SafeAreaView>
+  );
+}
+
+// Handle Form Submission
+const handleSubmit = e => {
+    alert(e); // e is our packet of text data
+    // Send to backend handler
+    // can also use <form action="URL" method="POST" style={styles.form}> if we have a URL to post to
+};
+
+// Form Layout Template
+const HTMLForm = () => (
+    <form onSubmit={handleSubmit} style={styles.form}>
+        <input type="text"></input>
+        <button type="submit" style={styles.button}></button>
+    </form>
+);
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+  },
+  container: {
+    width: "100%",
+    alignItems: "center",
+    paddingVertical: 20,
+  },
+  logoTitleGroup: {
+    alignItems: "center",
+    marginBottom: 100, // Space between logo/title and buttons
+  },
+  buttonsGroup: {
+    width: "100%",
+    alignItems: "center",
+  },
+  CompanyImage: {
+    width: "80%",
+    height: "30%",
+    alignItems:screenLeft,
+    marginLeft: "10%"
+  },
+  star: {
+    width: 100,
+    height: 100,
+    alignItems: screenLeft,
+    marginLeft: 100,
+  },
+  form: {
+    width: "80%",
+    height: "30%"
+  },
+  campusCritic: {
+    color: colors.primary,
+    fontSize: 42,
+    fontWeight: "700",
+    letterSpacing: -0.42,
+    textAlign: "center",
+    paddingHorizontal: 20,
+  },
+  button: {
+    width: 331,
+    height: 56,
+    marginBottom: 10, // Space between buttons
+    justifyContent: "center",
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 4 },
+  },
+  loginButtonBack: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 8,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+  },
+  registerButtonBack: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.primary,
+    backgroundColor: colors.white,
+    justifyContent: "center",
+  },
+  login: {
+    color: colors.white,
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  register: {
+    color: colors.primary,
+    textAlign: "center",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+});
