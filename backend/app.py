@@ -81,34 +81,27 @@ def get_restaurant_reviews(request, postID, pageNum):
 
     return reviewsPayload
 
+
 def get_api(where, userID):
+    #gets access to the database that has the users info
     cred = credentials.Certificate(r"./firebase_key_campus_critic.json")
     firebase_admin.initialize_app(cred)
     db = firestore.client()
+    #gets the specifc users information
     dbResults = db.collection('reviews').where(filter=FieldFilter('user_id', '==', userID)).stream()
     formattedReview = ""
+    #gets just the reviews left by the user
     for review in dbResults:
         review = review.to_dict()
-        '''
-        d = {'place_id': review['body']}
-        l = {}
-        data = request.json
-        for i in d:
-            restaurantID = data.get(i).__str__()
-
-            # Find the Restaurant ID model on the SQL database
-            # SQL Implementation, requires Firebase update / functionality review
-            restaurantData = restaurants.objects.get(pk=restaurantID)
-            restaurantName = restaurantData.name
-        '''
         formattedReview = formattedReview + review['body']
-
+    #gets acces the the gemini api to get recomendations
     genai.configure(api_key='AIzaSyDb9jb3yDjICQLaKLVxjZEIzl1YrPmt7Tw')
     model = genai.GenerativeModel('gemini-pro')
+    #formats the user reviews information to ask the ai for recomendations since it needs a string
     userReview2 = "Based on these reviews" + formattedReview + ", suggest 5 new " + where + ("for me to try. Also give "
                                                                                              "it in list format with "
                                                                                              "no reasons why")
-
+    #gets the AI response on its recomendations and prints them
     response = model.generate_content(userReview2)
     print(response.text)
     
