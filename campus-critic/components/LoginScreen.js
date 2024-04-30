@@ -20,6 +20,11 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     setLoading(true);
+    if (email === "" || password === "") {
+      setErrorMessage("Please fill out all fields");
+      setLoading(false);
+      return;
+    }
     const signInResult = await signIn(email, password);
     if (signInResult.message === "Success") {
       console.log("User signed in!", signInResult.user);
@@ -70,10 +75,8 @@ export default function LoginScreen() {
       {loading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={handleLogin}>
-            Login
-          </Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       )}
       <View style={styles.root}>

@@ -16,14 +16,21 @@ import { getUser } from "./methods/dbMethods";
 
 const LoginStack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function InsideLayout(user) {
   return (
     <InsideStack.Navigator>
+      {/* Use the TabScreen as a stack screen */}
       <InsideStack.Screen
         name="Home Screen"
-        component={HomeScreen}
+        component={TabScreen}
         initialParams={{ user: user }}
+        options={{ headerShown: false }}
+      />
+      <InsideStack.Screen
+        name="User Profile"
+        component={UserProfile}
         options={{ headerShown: false }}
       />
     </InsideStack.Navigator>
@@ -49,25 +56,25 @@ function LoginLayout() {
         options={{ headerShown: false }}
       />
     </LoginStack.Navigator>
-
-
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+  );
+}
 
 // Tab Navigator
-function TabScreen() {
+function TabScreen({ route }) {
+  const user = route.params.user;
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'AddReview') {
-            iconName = focused ? 'add-circle' : 'add-circle-outline';
-          } else if (route.name === 'Profile') {
-            iconName = focused ? 'person' : 'person-outline';
+          if (route.name === "Home") {
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "AddReview") {
+            iconName = focused ? "add-circle" : "add-circle-outline";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "person" : "person-outline";
           }
 
           return <Ionicons name={iconName} size={40} color={colors.primary} />;
@@ -76,14 +83,23 @@ function TabScreen() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.placeholderGray,
         tabBarStyle: {
-          backgroundColor: 'white',
-          paddingBottom: 25, 
-          paddingVertical: 15, 
+          backgroundColor: "white",
+          paddingBottom: 25,
+          paddingVertical: 15,
           height: 80,
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} /> 
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        initialParams={{ user: user }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={UserProfile}
+        initialParams={{ user: user }}
+      />
       {/* Add the AddReviewScreen component */}
       {/* Add the ProfileScreen component */}
     </Tab.Navigator>
@@ -97,6 +113,8 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       const getInfo = async (userID) => {
         const user = await getUser(userID);
+        user["uid"] = userID;
+        console.log("Document data:", user);
         setUser(user);
       };
 
@@ -107,34 +125,6 @@ function App() {
   return (
     <NavigationContainer>
       {user ? InsideLayout(user) : LoginLayout()}
-      <Stack.Navigator initialRouteName="Home Screen">
-        <Stack.Screen
-          name="Splash Screen"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Login Screen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register Screen"
-          component={RegisterScreen}
-          options={{ headerShown: false }}
-        />
-        {/* Use the TabScreen as a stack screen */}
-        <Stack.Screen
-          name="Home Screen"
-          component={TabScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="User Profile"
-          component={UserProfile}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
     </NavigationContainer>
   );
 }
