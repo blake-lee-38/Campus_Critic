@@ -9,11 +9,6 @@ const colors = {
     gold: '#FFCB45',
     placeholderGray: '#eeeeee',
 
-    lightGray: '#F7F8F9',
-    placeholderGray: '#EEEEEE',
-    star: '#FFCB45',
-    textBack: '#F6F6F6',
-    open: '#008405',
 }
 
 export default colors;

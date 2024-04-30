@@ -37,19 +37,14 @@ export const signUp = async (email, pass) => {
 };
 
 export const signIn = async (email, pass) => {
-  console.log(email, pass);
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, pass);
     const user = userCredential.user;
     console.log("User signed In!", user);
-    return { message: "Success", user: user };
+    return { message: "Success", user: "user" };
   } catch (error) {
     return { message: error.message };
   }
-};
-
-export const signUserOut = () => {
-  signOut(auth);
 };
 
 export const signUpGoogle = async () => {
