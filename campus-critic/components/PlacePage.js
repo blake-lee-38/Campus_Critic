@@ -135,7 +135,7 @@ const typeFormat = {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.background, 
+    backgroundColor: colors.background,
   },
 
   horizontalScrollView: {
@@ -304,26 +304,26 @@ const styles = StyleSheet.create({
   },
 
   addReviewButton: {
-    flexDirection: "row", 
-    width: 250, 
-    height: 56, 
-    alignItems: "center", 
-    justifyContent: "center", 
-    alignSelf: "center", 
-    backgroundColor: colors.primary, 
-    borderRadius: 28, 
-    elevation: 8, 
-    shadowColor: "#000", 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.25, 
-    shadowRadius: 3.84, 
+    flexDirection: "row",
+    width: 250,
+    height: 56,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    backgroundColor: colors.primary,
+    borderRadius: 28,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
 
   addReviewButtonText: {
-    color: colors.white, 
-    fontSize: 24, 
-    fontWeight: "bold", 
-    paddingHorizontal: 20, 
+    color: colors.white,
+    fontSize: 24,
+    fontWeight: "bold",
+    paddingHorizontal: 20,
   },
 
   recentReviewsContainer: {
